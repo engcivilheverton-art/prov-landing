@@ -1,0 +1,46 @@
+/** Rotas do app. A landing só aponta para elas; login/cadastro/dashboard ficam no app existente. */
+export const ROUTES = {
+  login: "/login",
+  cadastro: "/cadastro",
+  dashboard: "/dashboard",
+  privacidade: "/privacidade",
+  termos: "/termos",
+} as const;
+
+export type PlanId = "mensal" | "anual";
+
+export interface Plan {
+  id: PlanId;
+  name: string;
+  /** Preço por mês, em reais. */
+  monthlyPrice: number;
+  /** Valor cobrado de uma vez (apenas plano anual). */
+  chargedTotal: number | null;
+}
+
+/** Valores dos planos: edite aqui. */
+export const PLANS: Record<PlanId, Plan> = {
+  mensal: { id: "mensal", name: "Plano mensal", monthlyPrice: 11.99, chargedTotal: null },
+  anual: { id: "anual", name: "Plano anual", monthlyPrice: 9.99, chargedTotal: 119.88 },
+};
+
+export const brl = (v: number) =>
+  v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+export function annualSavings() {
+  const monthlyYear = PLANS.mensal.monthlyPrice * 12;
+  const annualYear = PLANS.anual.chargedTotal ?? PLANS.anual.monthlyPrice * 12;
+  return {
+    amount: Math.round((monthlyYear - annualYear) * 100) / 100,
+    percent: Math.round((1 - annualYear / monthlyYear) * 100),
+  };
+}
+
+/** O botão de assinar leva ao cadastro; depois o app encaminha ao checkout do gateway. */
+export const planHref = (plan: PlanId) => `${ROUTES.cadastro}?plano=${plan}`;
+
+export const SITE = {
+  name: "PROV.",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "",
+};

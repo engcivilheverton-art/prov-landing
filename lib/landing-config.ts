@@ -1,8 +1,10 @@
-/** Rotas do app. A landing só aponta para elas; login/cadastro/dashboard ficam no app existente. */
+/** Rotas do app financeiro, hospedado separadamente da landing. */
+const APP_URL = (process.env.NEXT_PUBLIC_APP_URL ?? "https://prov-financeiro.vercel.app").replace(/\/$/, "");
+
 export const ROUTES = {
-  login: "/login",
-  cadastro: "/cadastro",
-  dashboard: "/dashboard",
+  login: `${APP_URL}/login`,
+  cadastro: `${APP_URL}/login?modo=criar`,
+  dashboard: `${APP_URL}/dashboard`,
   privacidade: "/privacidade",
   termos: "/termos",
 } as const;
@@ -36,8 +38,8 @@ export function annualSavings() {
   };
 }
 
-/** O botão de assinar leva ao cadastro; depois o app encaminha ao checkout do gateway. */
-export const planHref = (plan: PlanId) => `${ROUTES.cadastro}?plano=${plan}`;
+/** O app recebe o plano escolhido, autentica o cliente e abre o checkout do Mercado Pago. */
+export const planHref = (plan: PlanId) => `${ROUTES.cadastro}&plano=${plan}`;
 
 export const SITE = {
   name: "PROV.",

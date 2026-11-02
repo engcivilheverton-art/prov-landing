@@ -12,7 +12,7 @@ export default function Hero() {
           <h1>Assuma o <em>controle</em> da sua vida financeira.</h1>
           <p>Organize suas receitas, despesas, cartões e objetivos financeiros em um só lugar. Tenha clareza sobre seu dinheiro e tome decisões melhores todos os dias.</p>
           <div className={s.bt}>
-            <Link className={`${s.btn} ${s.bp}`} href={ROUTES.cadastro}>Começar gratuitamente</Link>
+            <Link className={`${s.btn} ${s.bp}`} href={ROUTES.cadastro}>Criar conta grátis</Link>
             <a className={`${s.btn} ${s.bo}`} href="#funcionalidades">Conhecer funcionalidades</a>
           </div>
         </div>

@@ -5,7 +5,7 @@ export const FAQ: [string, string][] = [
   ["Preciso instalar algum programa?", "Não. A PROV. é um aplicativo web, acessado pelo navegador."],
   ["Posso acessar pelo celular?", "Sim. A página e o aplicativo são pensados para funcionar em computador, tablet e celular."],
   ["Posso cadastrar vários cartões?", "Sim. Você pode organizar limites, compras e faturas dos seus cartões."],
-  ["Como funciona a assinatura?", "Há plano mensal e plano anual, com pagamento único. As condições são informadas antes da contratação."],
+  ["Como funciona a assinatura?", "Há plano mensal com cobrança mensal e plano anual com cobrança a cada 12 meses. A contratação é feita no aplicativo e o Premium só é liberado após confirmação da assinatura."],
   ["Posso cancelar minha assinatura?", "Sim, conforme as condições comerciais do plano contratado."],
   ["Meus dados ficam protegidos?", "Cada usuário acessa apenas a sua conta, e a política de privacidade explica como os dados são tratados."],
   ["Existe integração automática com bancos?", "Não. O controle inicial é feito por lançamentos manuais."],

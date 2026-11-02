@@ -1,65 +1,53 @@
-# PROV. — Landing page (Next.js + TypeScript)
+# PROV. — página pública
 
-Página pública de vendas do aplicativo web PROV. Next.js 14 (App Router), TypeScript, CSS Modules.
-Sem Tailwind e sem biblioteca de UI, para não conflitar com o app existente.
+Landing Next.js 15 (App Router), TypeScript e CSS Modules. Este projeto contém somente apresentação pública e CTAs; não autentica usuários, não armazena dados pessoais de acesso e não processa pagamentos. O app financeiro permanece em outro repositório e deployment independente.
 
-## Rodar localmente
+## Desenvolvimento local
 
-```bash
-npm install
-cp .env.example .env.local   # ajuste a URL do site
-npm run dev                  # http://localhost:3000
-npm run typecheck && npm run build
-```
-
-Em modo isolado, `/login`, `/cadastro` e `/dashboard` não existem (são do app). `/privacidade` e `/termos`
-são páginas provisórias: troque pelo texto jurídico definitivo.
-
-## Planos e preços
-
-Edite `lib/landing-config.ts`:
-
-- Mensal: R$ 11,99 por mês.
-- Anual: R$ 9,99 por mês, em pagamento único de R$ 119,88 por ano.
-- A economia (17%, R$ 24,00 por ano) é calculada automaticamente a partir desses valores.
-
-## Conectar ao app web existente
-
-1. Copie para o projeto do app: `components/landing/`, `lib/landing-config.ts`, `public/brand/logo-prov.png`
-   e as pastas `app/privacidade`, `app/termos` (se ainda não existirem).
-2. Em `app/page.tsx` do app, use o conteúdo deste `app/page.tsx` (ou renderize `<Landing />`).
-   Se `/` hoje redireciona para o dashboard, deixe a landing em `/` e redirecione apenas usuários já logados.
-3. Não copie `app/layout.tsx` deste projeto: use o layout raiz do app.
-4. Confirme que `@/*` aponta para a raiz no `tsconfig.json` do app.
-5. Os botões já apontam para `ROUTES` (`/login`, `/cadastro`). Nada de autenticação foi criado aqui:
-   reutilize o Firebase Authentication que já existe nessas rotas.
-6. Rode `npm run build` para conferir. A landing não altera o dashboard nem as funções internas.
-
-## Fluxo de assinatura (gateway externo)
-
-Os botões de assinar levam a `/cadastro?plano=mensal` ou `/cadastro?plano=anual`. Sugestão de fluxo:
-
-1. O app cria a conta (Firebase Auth) e lê o parâmetro `plano`.
-2. Redireciona ao checkout hospedado do gateway escolhido, enviando e-mail e ID do usuário.
-3. O gateway avisa o pagamento por webhook; o backend valida a assinatura do webhook e grava o status.
-4. O app libera ou bloqueia o acesso com base nesse status, nunca apenas pelo retorno do checkout.
-
-Esta landing não processa pagamentos.
-
-## Trocar imagens e textos
-
-- Telas da demonstração: `components/landing/Demo.tsx` e `DashboardMock.tsx` (hoje ilustrativas).
-  Para usar capturas reais, coloque os arquivos em `public/screens/` e use `next/image`.
-- Imagem de compartilhamento: `app/page.tsx` usa a logo. Para um Open Graph melhor, crie `public/og.png` (1200×630).
-- Textos: um arquivo por seção em `components/landing/`.
-
-## Subir no GitHub
+Requisitos: Node.js 20.9+.
 
 ```bash
-git init
-git add .
-git commit -m "Landing page PROV."
-git branch -M main
-git remote add origin https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
-git push -u origin main
+npm ci
+Copy-Item .env.example .env.local
+npm run dev
 ```
+
+A landing inicia em `http://localhost:3001`. Por padrão, os CTAs encaminham ao app em `http://localhost:3000`.
+
+## Integração com o app
+
+Configure `NEXT_PUBLIC_APP_URL` com a origem pública do app PROV correspondente ao ambiente. Os links levam a:
+
+- Criar conta grátis: `/cadastro`.
+- Entrar: `/login`.
+- Contratar mensal/anual: `/cadastro?plano=mensal` ou `/cadastro?plano=anual`.
+
+O app preserva Firebase Authentication, oferece acesso Free sem checkout e cria a assinatura Premium somente após a autenticação. A landing não recebe tokens ou segredos do Mercado Pago/Firebase.
+
+Os preços e benefícios exibidos na seção Planos são obtidos de `GET {NEXT_PUBLIC_APP_URL}/api/billing/plans`, cuja fonte é `src/lib/planos.ts` no projeto do app. Se essa rota estiver inacessível, a landing apresenta o CTA Free e informa que os planos ficam disponíveis quando o app estiver acessível. Em Preview da Vercel, confirme que a proteção de deployment não impede a consulta servidor-a-servidor da landing à rota pública de planos.
+
+## Variáveis de ambiente da landing
+
+Configure somente no projeto Vercel da landing:
+
+| Variável | Uso |
+|---|---|
+| `NEXT_PUBLIC_SITE_URL` | Origem pública deste site, usada em metadados, robots e sitemap |
+| `NEXT_PUBLIC_APP_URL` | Origem do app independente para CTAs e consulta pública de planos |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | E-mail público opcional do rodapé |
+
+Preview e Production devem apontar para a URL de app correspondente. Não configure credenciais Firebase, tokens do Mercado Pago ou segredo de webhook neste projeto.
+
+O checklist de publicação dos dois projetos fica no [repositório do aplicativo](https://github.com/engcivilheverton-art/Prov.Finance/blob/feature/mercadopago-checkout/DEPLOY_CHECKLIST.md).
+
+## Verificação
+
+```bash
+npm run typecheck
+npm run lint
+npm run build
+```
+
+## Páginas legais
+
+`/privacidade` e `/termos` são páginas provisórias. Substitua o conteúdo pelo texto jurídico definitivo antes de publicar amplamente.

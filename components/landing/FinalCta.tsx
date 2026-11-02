@@ -9,7 +9,7 @@ export default function FinalCta() {
         <div className={s.cta} data-reveal>
           <h2>Comece hoje a transformar sua relação com o dinheiro.</h2>
           <p>Organize suas finanças, acompanhe seus resultados e construa um planejamento financeiro mais consciente.</p>
-          <Link className={`${s.btn} ${s.bp}`} href={ROUTES.cadastro}>Começar gratuitamente</Link>
+          <Link className={`${s.btn} ${s.bp}`} href={ROUTES.cadastro}>Criar conta grátis</Link>
         </div>
       </div>
     </section>

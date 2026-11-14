@@ -1,8 +1,8 @@
 import s from "./landing.module.css";
 
 const videos = [
-  { src: "/videos/prov-apresentacao.mp4", label: "Apresentação do PROV" },
   { src: "/videos/prov-demonstracao.mp4", label: "Demonstração do PROV" },
+  { src: "/videos/prov-apresentacao.mp4", label: "Apresentação do PROV" },
 ];
 
 export default function VideoShowcase() {
@@ -21,7 +21,10 @@ export default function VideoShowcase() {
             <video
               key={video.src}
               className={s.videoPlayer}
+              autoPlay
               controls
+              loop
+              muted
               playsInline
               preload="metadata"
               aria-label={video.label}

@@ -5,5 +5,5 @@
 @media (max-width:600px){.g4,.pl,.fg{grid-template-columns:1fr}.kp{grid-template-columns:1fr 1fr}.k.m{grid-column:1/-1}.db2{grid-template-columns:1fr}.act .bp{display:none}.sol{padding:26px}}
 @media (prefers-reduced-motion:reduce){.prov *{animation:none!important;transition:none!important}.prov[data-js] [data-reveal]{opacity:1;transform:none}}
 
-.videoGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:40px auto 0;max-width:1000px}.videoPlayer{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#07111f;border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh)}
-@media (max-width:700px){.videoGrid{grid-template-columns:1fr;gap:16px;margin-top:28px}}
+.videoGrid{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;margin:40px auto 0;max-width:860px}.videoPlayer{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#07111f;border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh)}
+@media (max-width:700px){.videoGrid{gap:16px;margin-top:28px}}

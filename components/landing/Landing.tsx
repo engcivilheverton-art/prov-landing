@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import Header from "./Header";
 import Hero from "./Hero";
+import VideoShowcase from "./VideoShowcase";
 import Problem from "./Problem";
 import Features from "./Features";
 import Demo from "./Demo";
@@ -23,6 +24,7 @@ export default function Landing() {
       <Header />
       <main>
         <Hero />
+        <VideoShowcase />
         <Problem />
         <Features />
         <Demo />

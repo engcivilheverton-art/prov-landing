@@ -24,11 +24,11 @@ Configure `NEXT_PUBLIC_APP_URL` com a origem pública do app PROV correspondente
 
 O app preserva Firebase Authentication, oferece acesso Free sem checkout e cria a assinatura Premium somente após a autenticação. A landing não recebe tokens ou segredos do Mercado Pago/Firebase.
 
-Os preços e benefícios exibidos na seção Planos são obtidos de `GET {NEXT_PUBLIC_APP_URL}/api/billing/plans`, cuja fonte é `src/lib/planos.ts` no projeto do app. Se essa rota estiver inacessível, a landing apresenta o CTA Free e informa que os planos ficam disponíveis quando o app estiver acessível. Em Preview da Vercel, confirme que a proteção de deployment não impede a consulta servidor-a-servidor da landing à rota pública de planos.
+Os preços e benefícios exibidos na seção Planos são obtidos de `GET {NEXT_PUBLIC_APP_URL}/api/billing/plans`, cuja fonte é `src/lib/planos.ts` no projeto do app. Se essa rota estiver inacessível, a landing apresenta o CTA Free e informa que os planos ficam disponíveis quando o app estiver acessível. Em Deploy Previews do Netlify, confirme que a proteção do deployment não impede a consulta servidor-a-servidor da landing à rota pública de planos.
 
 ## Variáveis de ambiente da landing
 
-Configure somente no projeto Vercel da landing:
+Configure somente no projeto Netlify da landing:
 
 | Variável | Uso |
 |---|---|
@@ -50,4 +50,4 @@ npm run build
 
 ## Páginas legais
 
-`/privacidade` e `/termos` são páginas provisórias. Substitua o conteúdo pelo texto jurídico definitivo antes de publicar amplamente.
+`/privacidade` apresenta um resumo e encaminha para a política completa em `NEXT_PUBLIC_APP_URL/privacidade`. `/termos` ainda é uma página provisória e precisa de texto revisado antes de divulgação ampla.

@@ -1,8 +1,8 @@
 /** A landing encaminha ao app; não autentica usuários nem processa pagamentos. */
-export const APP_URL = (process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000').replace(/\/$/, '');
+export const APP_URL = (process.env.NEXT_PUBLIC_APP_URL ?? 'https://prov-financeiro.netlify.app').replace(/\/$/, '');
 export const SITE = {
   name: 'PROV.',
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://prov-landing.vercel.app').replace(/\/$/, ''),
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://prov-landing.netlify.app').replace(/\/$/, ''),
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? '',
 } as const;
 
